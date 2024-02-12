@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\models\Producto;
 
 class ProductoSeeder extends Seeder
 {
@@ -12,6 +13,6 @@ class ProductoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Producto::factory()->count(100)->create();
     }
 }
