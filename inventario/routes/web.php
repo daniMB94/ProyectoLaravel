@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    $variable1 = "AAA";
     return view('welcome');
 });
 

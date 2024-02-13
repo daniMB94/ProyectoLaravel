@@ -10,7 +10,7 @@
       "request": "launch",
       "port": 9003,
       "pathMappings": {
-        "/var/www/html": "C:Usersdani_OneDriveDocumentosF.P. Superior desarrollo de aplicaciones webPresencial 2023-2024ModulosEntorno servidorTema7ProyectoDaniinventario"
+        "/var/www/html": "$(workspaceFolder)"
       }
     },
     {
