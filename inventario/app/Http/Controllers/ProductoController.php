@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        $productos = Producto::all();
+        var_dump($productos);
+        //return view('dashboard', ['productos' => $productos]);
     }
 
     /**
