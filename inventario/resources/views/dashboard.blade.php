@@ -25,6 +25,9 @@
                     <x-table.td>{{ $producto->estado }}</x-table.td> 
                 </tr>
         @endforeach
+        <x-slot name="plinks">
+            {{ $productos->links() }}
+        </x-slot>
 
 </x-table>
 

@@ -16,7 +16,8 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next, $rol): Response
     {
 
-        if($request->user()->rol != $rol) {
+    if ($request->user()->rol != $rol) {
+            //No tiene permiso
             return redirect("/");
         }
 

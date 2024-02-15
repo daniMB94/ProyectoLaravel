@@ -28,4 +28,8 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'middlewareRole:admin'])
     Route::get('/dashboard', [ProductoController::class, 'index'])->name('dashboard');
 });
 
+Route::prefix('user')->group(function () {
+    Route::get('/dashboard', [ProductoController::class, 'show'])->name('userDashboard'); 
+});
+
 require __DIR__.'/auth.php';

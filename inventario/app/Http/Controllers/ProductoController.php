@@ -13,7 +13,7 @@ class ProductoController extends Controller
      */
     public function index(): View
     {
-        $productos = Producto::all();
+        $productos = Producto::paginate(15);
         return view('dashboard', ['productos' => $productos]);
     }
 
@@ -38,7 +38,10 @@ class ProductoController extends Controller
      */
     public function show(Producto $producto)
     {
-        //
+        // Obtén los 10 primeros productos
+    $productos = Producto::paginate(15);
+
+    return view('dashboard', ['productos' => $productos]);
     }
 
     /**
