@@ -14,8 +14,7 @@ class ProductoController extends Controller
     public function index(): View
     {
         $productos = Producto::all();
-        var_dump($productos);
-        //return view('dashboard', ['productos' => $productos]);
+        return view('dashboard', ['productos' => $productos]);
     }
 
     /**
