@@ -15,6 +15,7 @@
                 <x-table.th>Stock</x-table.th>
                 <x-table.th>Estado</x-table.th>
         </x-slot>
+
     @foreach ($productos as $producto)
                 <tr>
                     <x-table.td>{{ $producto->codigo }}</x-table.td>
@@ -25,6 +26,7 @@
                     <x-table.td>{{ $producto->estado }}</x-table.td> 
                 </tr>
         @endforeach
+
         <x-slot name="plinks">
             {{ $productos->links() }}
         </x-slot>

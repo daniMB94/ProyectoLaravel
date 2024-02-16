@@ -12,7 +12,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = Categoria::all();
+        return view('categoria', ['categorias' => $categorias]);
     }
 
     /**
@@ -28,7 +29,8 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $categoria = new Categoria();
+        $categoira->nombre = $request->nombre;
     }
 
     /**

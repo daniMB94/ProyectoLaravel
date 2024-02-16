@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\LocalizacionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +28,8 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'middlewareRole:admin'])
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/dashboard', [ProductoController::class, 'index'])->name('dashboard');
+    Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias');
+    Route::get('/localizaciones', [LocalizacionController::class, 'index'])->name('localizaciones');
 });
 
 

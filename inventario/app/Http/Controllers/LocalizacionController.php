@@ -12,7 +12,9 @@ class LocalizacionController extends Controller
      */
     public function index()
     {
-        //
+        $localizaciones = Localizacion::all();
+
+        return view('localizaciones', ['localizaciones' => $localizaciones]);
     }
 
     /**
