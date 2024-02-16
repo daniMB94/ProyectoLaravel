@@ -6,21 +6,21 @@
         </h2>
     </x-slot>
     <x-lista>
-    <x-slot name="titulo"> Localizacion de los proveedores </x-slot>
-
-    
-
-    <x-slot name="items">
+        <x-slot name="titulo"> Localizacion de los proveedores </x-slot>
 
 
-     @foreach ($localizaciones as $localizacion)
 
-    <x-lista.li>{{ $localizacion->ciudad . ', ' . $localizacion->nombre_edificio }}</x-lista.li>
+        <x-slot name="items">
 
 
-     @endforeach
+            @foreach ($localizaciones as $localizacion)
 
-    </x-slot>
+            <x-lista.li>{{ $localizacion->ciudad . ', ' . $localizacion->nombre_edificio }}</x-lista.li>
+
+
+            @endforeach
+
+        </x-slot>
 
     </x-lista>
 

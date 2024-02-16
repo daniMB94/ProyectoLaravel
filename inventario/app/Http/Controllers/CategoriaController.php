@@ -31,6 +31,9 @@ class CategoriaController extends Controller
     {
         $categoria = new Categoria();
         $categoira->nombre = $request->nombre;
+        $categoira->save();
+
+        return ['message' => 'Categoria creada', 'categoria' => $categoria];
     }
 
     /**
