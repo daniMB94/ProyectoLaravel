@@ -29,7 +29,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'middlewareRole:admin'])
 
     Route::get('/dashboard', [ProductoController::class, 'index'])->name('dashboard');
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias');
-    Route::get('/categorias/store', [CategoriaController::class, 'store'])->name('categorias.store');
+    Route::post('/categorias/store', [CategoriaController::class, 'store'])->name('categorias.store');
     Route::get('/localizaciones', [LocalizacionController::class, 'index'])->name('localizaciones');
 });
 

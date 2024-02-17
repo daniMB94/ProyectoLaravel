@@ -26,8 +26,12 @@
 
     </x-lista>
 
+    @php
+    $nombreModal = 'crearCategoria';
+    @endphp
+
     <x-modal>
-        <x-slot name="name">crearCategoria</x-slot>
+        <x-slot name="name">{{ $nombreModal }}</x-slot>
 
         <form method="POST" action="{{ route('categorias.store') }}" enctype="multipart/form-data">
             @csrf
@@ -41,15 +45,14 @@
             </div>
 
         </form>
-
-
     </x-modal>
+
     <div class="flex items-center justify-end mt-4">
-        <x-primary-button class="ms-4" x-on:click="$dispatch('open-modal', 'crearCategoria')">
+        <x-primary-button class="ms-4" x-data x-on:click="$dispatch('open-modal', '{{ $nombreModal }}')">
             {{ __('Crear Categoria') }}
         </x-primary-button>
-
     </div>
+
 
 
 
