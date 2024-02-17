@@ -30,10 +30,10 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         $categoria = new Categoria();
-        $categoira->nombre = $request->nombre;
-        $categoira->save();
+        $categoria->nombre = $request->nombre;
+        $categoria->save();
 
-        return ['message' => 'Categoria creada', 'categoria' => $categoria];
+        return redirect()->route('categorias');
     }
 
     /**
@@ -63,8 +63,9 @@ class CategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categoria $categoria)
+    public function destroy($id)
     {
-        //
+        Categoria::destroy($id);
+        return redirect()->route('categorias');
     }
 }

@@ -28,9 +28,13 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'middlewareRole:admin'])
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/dashboard', [ProductoController::class, 'index'])->name('dashboard');
+    Route::post('/dashboard/store', [ProductoController::class, 'store'])->name('dashboard.store');
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias');
     Route::post('/categorias/store', [CategoriaController::class, 'store'])->name('categorias.store');
+    Route::get('/categorias/delete/{id}', [CategoriaController::class, 'destroy'])->name('categorias.delete');
     Route::get('/localizaciones', [LocalizacionController::class, 'index'])->name('localizaciones');
+    Route::post('/localizaciones/store', [LocalizacionController::class, 'store'])->name('localizaciones.store');
+    Route::get('/localizaciones/delete/{id}', [LocalizacionController::class, 'destroy'])->name('localizaciones.delete');
 });
 
 

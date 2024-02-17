@@ -30,7 +30,14 @@ class LocalizacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $localizacion = new Localizacion();
+        $localizacion->ciudad = $request->ciudad;
+        $localizacion->nombre_edificio = $request->nombre_edificio;
+        $localizacion->direccion = $request->direccion;
+        $localizacion->numero_sala = $request->numero_sala;
+        $localizacion->save();
+
+        return redirect()->route('localizaciones');
     }
 
     /**
@@ -60,8 +67,9 @@ class LocalizacionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Localizacion $localizacion)
+    public function destroy($id)
     {
-        //
+        Localizacion::destroy($id);
+        return redirect()->route('localizaciones');
     }
 }
