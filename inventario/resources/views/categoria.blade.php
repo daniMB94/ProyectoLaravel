@@ -18,7 +18,7 @@
 
             @foreach ($categorias as $categoria)
 
-            <x-lista.li>{{ $categoria->nombre }}<a class="font-medium text-sm text-red-500"
+            <x-lista.li>{{ $categoria->nombre }}<a class="font-medium text-sm" style="color: red"
                     href="{{ route('categorias.delete', ['id' => $categoria->id]) }}">&emsp;&emsp;Eliminar</a>
             </x-lista.li>
 

@@ -11,9 +11,10 @@
             <x-table.th>Codigo</x-table.th>
             <x-table.th>Modelo</x-table.th>
             <x-table.th>Fabricante</x-table.th>
-            <x-table.th>Descripcion</x-table.th>
             <x-table.th>Stock</x-table.th>
             <x-table.th>Estado</x-table.th>
+            <x-table.th>Categoria</x-table.th>
+            <x-table.th>Acciones</x-table.th>
         </x-slot>
 
         @foreach ($productos as $producto)
@@ -21,9 +22,86 @@
             <x-table.td>{{ $producto->codigo }}</x-table.td>
             <x-table.td>{{ $producto->modelo }}</x-table.td>
             <x-table.td>{{ $producto->fabricante }}</x-table.td>
-            <x-table.td>{{ $producto->descripcion }}</x-table.td>
             <x-table.td>{{ $producto->stock }}</x-table.td>
             <x-table.td>{{ $producto->estado }}</x-table.td>
+            <x-table.td>{{ optional($producto->categoria)->nombre }}</x-table.td>
+            <x-table.td>
+
+
+                <x-modal>
+                    <x-slot name="name">{{ 'modal-' . $producto->id }}</x-slot>
+
+                    <div
+                        class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+
+                        <x-detalle>
+
+                            <x-slot name='localizacion'>
+                                @if(isset($producto->localizacion))
+                                <x-lista>
+                                    <x-slot name="titulo">Dirección del proveedor</x-slot>
+                                    <x-slot name="items">
+                                        <x-lista.li>
+                                            Ciudad: {{ $producto->localizacion->ciudad }}
+                                        </x-lista.li>
+                                        <x-lista.li>
+                                            Edificio: {{ $producto->localizacion->nombre_edificio }}
+                                        </x-lista.li>
+                                        <x-lista.li>
+                                            Direccion: {{ $producto->localizacion->direccion }}
+                                        </x-lista.li>
+                                        <x-lista.li>
+                                            Numero de sala: {{ $producto->localizacion->numero_sala }}
+                                        </x-lista.li>
+                                    </x-slot>
+                                </x-lista>
+                                @else
+                                <h3>Aún no tiene datos de localización asignados</h3>
+                                @endif
+                            </x-slot>
+                            <x-slot name='descripcion'>
+                                Descripcion del producto: {{ $producto->descripcion }}
+                            </x-slot>
+                            @if(isset($producto->imagen))
+                            <x-slot name='imagen'>
+                                {{ asset('images/' . $producto->imagen ) }}
+                            </x-slot>
+                            @else
+                            <h3>No tiene ninguna imagen asignada</h3>
+                            @endif
+                        </x-detalle>
+
+
+
+                        <x-secondary-button class="ms-4" x-data
+                            x-on:click="$dispatch('close-modal', '{{ 'modal-' . $producto->id }}')">
+                            {{__('Cerrar')}}
+                        </x-secondary-button>
+                        <form method="POST"
+                            action="{{ route('dashboard.formUpdateProduct', ['producto' => $producto]) }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <x-primary-button class="ms-4">
+                                {{__('Modificar Producto')}}
+                            </x-primary-button>
+                        </form>
+
+                    </div>
+                </x-modal>
+                <div class="flex items-center justify-end mt-4">
+                    <x-secondary-button class="ms-4" x-data
+                        x-on:click="$dispatch('open-modal', '{{ 'modal-' . $producto->id }}')" style="color: #4080ff">
+                        {{__('Ver detalles')}}
+                    </x-secondary-button>
+
+
+                </div>
+
+            </x-table.td>
+            <x-table.td>
+                <a class="font-medium text-sm" style="color: red"
+                    href="{{ route('dashboard.delete', ['id' => $producto->id, 'page' => $productos->currentPage()]) }}">&emsp;&emsp;Eliminar</a>
+            </x-table.td>
         </tr>
         @endforeach
 
@@ -82,7 +160,7 @@
                 <div>
                     <x-input-label for="imagen" :value="__('Imagen')" />
                     <x-text-input id="imagen" class="block mt-1 w-full" type="text" name="imagen" :value="old('imagen')"
-                        required autofocus autocomplete="direccion" />
+                        required autofocus autocomplete="imagen" />
                     <x-input-error :messages="$errors->get('imagen')" class="mt-2" />
                 </div>
 

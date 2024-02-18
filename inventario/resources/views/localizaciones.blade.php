@@ -20,8 +20,8 @@
 
             <x-lista.li>
                 {{ $localizacion->ciudad . $localizacion->edificio . ', ' . $localizacion->direccion . ', Numero de sala: ' . $localizacion->numero_sala }}<a
-                    class="font-medium text-sm text-red-500"
-                    href="{{ route('localizaciones.delete', ['id' => $localizacion->id]) }}">&emsp;&emsp;Eliminar</a>
+                    class="font-medium text-sm" style="color: red""
+                    href=" {{ route('localizaciones.delete', ['id' => $localizacion->id]) }}">&emsp;&emsp;Eliminar</a>
             </x-lista.li>
 
             @endforeach

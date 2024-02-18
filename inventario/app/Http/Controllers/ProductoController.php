@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -13,8 +14,9 @@ class ProductoController extends Controller
      */
     public function index(): View
     {
-        $productos = Producto::paginate(15);
-        return view('dashboard', ['productos' => $productos]);
+        $productos = Producto::with(['categoria', 'localizacion'])->paginate(9);
+
+        return view('dashboard', compact('productos'));
     }
 
     /**
@@ -30,7 +32,17 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $producto = new Producto();
+        $producto->codigo = $request->codigo;
+        $producto->modelo = $request->modelo;
+        $producto->fabricante = $request->fabricante;
+        $producto->descripcion = $request->descripcion;
+        $producto->imagen = $request->imagen;
+        $producto->stock = $request->stock;
+        $producto->estado = $request->estado;
+        $producto->save();
+
+        return redirect()->route('dashboard');
         
     }
 
@@ -47,7 +59,7 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        //
+        return view('producto.formUpdateProduct', ['producto' => $producto]);
     }
 
     /**
@@ -61,8 +73,9 @@ class ProductoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Producto $producto)
+    public function destroy($id, $page)
     {
-        //
+        Producto::destroy($id);
+        return redirect('admin/dashboard?page='.$page);
     }
 }
