@@ -40,8 +40,9 @@ class LocalizacionController extends Controller
         $localizacion->numero_sala = $request->numero_sala;
         $localizacion->save();
 
+        
         if($pintarDashboard) {
-            return redirect()->route('dashboard.updateProduct', ['id' => $request->id_producto, 'id_localizacion' => $localizacion->id])->method('post');
+           return redirect('admin/dashboard/update?id=' . $request->id_producto . '&id_localizacion=' . $localizacion->id);
         }
         
     }
