@@ -30,7 +30,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'middlewareRole:admin'])
     Route::get('/dashboard', [ProductoController::class, 'index'])->name('dashboard');
     Route::post('/dashboard/store', [ProductoController::class, 'store'])->name('dashboard.store');
     Route::get('/dashboard/delete/{id}/{page}', [ProductoController::class, 'destroy'])->name('dashboard.delete');
-    Route::post('/dashboard/formUpdateProduct/{producto}', [ProductoController::class, 'edit'])->name('dashboard.formUpdateProduct');
+    Route::get('/dashboard/formUpdateProduct/{producto}', [ProductoController::class, 'edit'])->name('dashboard.formUpdateProduct');
     Route::post('/dashboard/updateProduct/{id}/{id_localizacion?}', [ProductoController::class, 'update'])->name('dashboard.updateProduct');
     Route::get('/dashboard/filtrar', [ProductoController::class, 'filtrar'])->name('dashboard.filtrar');
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias');

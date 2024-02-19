@@ -77,11 +77,14 @@
 
 
         @if(isset($producto->localizacion))
+
         @php
+
         $ciudad = $producto->localizacion->ciudad;
         $edificio = $producto->localizacion->nombre_edificio;
         $direccion = $producto->localizacion->direccion;
         $sala = $producto->localizacion->numero_sala;
+
         @endphp
 
         <fieldset class="p-4">
@@ -118,7 +121,6 @@
                 <x-input-error :messages="$errors->get('numero_sala')" class="mt-2" />
             </div>
         </fieldset>
-
 
         <x-primary-button class="ms-4">
             {{ __('Actualizar Producto') }}
@@ -173,11 +175,10 @@
                         :value="old('numero_sala')" required autofocus autocomplete="numero_sala" />
                     <x-input-error :messages="$errors->get('numero_sala')" class="mt-2" />
                 </div>
-                <input type="hidden" name="pintarDashboard" value="false">
-                <input type="hidden" name="id_producto" value="{{ $producto->id }}">
+                <input type="hidden" name="producto" value="{{ $producto }}">
 
                 <x-primary-button class="ms-4">
-                    {{ __('Crear nueva localizacion') }}
+                    {{ __('Datos de la nueva localizacion') }}
                 </x-primary-button>
 
             </form>

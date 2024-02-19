@@ -59,8 +59,9 @@ class ProductoController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Producto $producto)
-    {
+    {   
         return view('producto.formUpdateProduct', ['producto' => $producto]);
+
     }
 
     /**

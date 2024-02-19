@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Localizacion;
 use Illuminate\Http\Request;
+use App\Models\Producto;
 
 class LocalizacionController extends Controller
 {
@@ -39,10 +40,20 @@ class LocalizacionController extends Controller
         $localizacion->direccion = $request->direccion;
         $localizacion->numero_sala = $request->numero_sala;
         $localizacion->save();
-
         
-        if($pintarDashboard) {
-           return redirect('admin/dashboard/update?id=' . $request->id_producto . '&id_localizacion=' . $localizacion->id);
+        $ultimaLocalizacion = Localizacion::latest()->first();
+        
+        // Se verifica si se obtuvo una localización
+        if ($ultimaLocalizacion) {
+
+            $producto = Producto::find($request->producto);
+           
+            $request->producto->update(['localizacion_id' => $ultimaLocalizacion->id]);
+
+            return redirect()->route('dashboard.formUpdateProduct', ['producto' => $request->producto]);
+        } else {
+            //si no hubiera ninguna localización se redireccionará al inicio
+            return redirect()->route('dashboard');
         }
         
     }

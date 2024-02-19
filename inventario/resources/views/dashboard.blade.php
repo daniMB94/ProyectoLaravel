@@ -89,14 +89,13 @@
                             x-on:click="$dispatch('close-modal', '{{ 'modal-' . $producto->id }}')">
                             {{__('Cerrar')}}
                         </x-secondary-button>
-                        <form method="POST"
-                            action="{{ route('dashboard.formUpdateProduct', ['producto' => $producto]) }}"
-                            enctype="multipart/form-data">
-                            @csrf
-                            <x-primary-button class="ms-4">
-                                {{__('Modificar Producto')}}
-                            </x-primary-button>
-                        </form>
+
+                        <x-primary-button class="ms-4">
+                            <a href="{{ route('dashboard.formUpdateProduct', ['producto' => $producto]) }}">
+                                {{__('Modificar producto')}}
+                            </a>
+                        </x-primary-button>
+
 
                     </div>
                 </x-modal>

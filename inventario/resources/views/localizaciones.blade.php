@@ -74,7 +74,6 @@
                         :value="old('numero_sala')" required autofocus autocomplete="numero_sala" />
                     <x-input-error :messages="$errors->get('numero_sala')" class="mt-2" />
                 </div>
-                <input type="hidden" name="pintarDashboard" value="true">
 
                 <x-primary-button class="ms-4">
                     {{ __('Guardar nueva localizacion') }}
