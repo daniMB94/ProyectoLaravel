@@ -6,6 +6,18 @@
     </x-slot>
     <!--AQUI TENDRE QUE PASAR LOS PRODUCTOS PARA PINTARLOS EN UNA TABLA-->
 
+    <div
+        class=" my-5 px-3 flex-wrap relative flex flex-col text-gray-700 bg-transparent shadow-none rounded-xl bg-clip-border">
+        <form action="{{ route('dashboard.filtrar') }}" method="get">
+            @csrf
+            <x-input-label for="filtro" :value="__('Filtro de búsqueda')" />
+            <x-text-input id="filtro" name="filtro" type="text" class="mt-2 px-2 py-2" :value="old('filtro')" required
+                autofocus autocomplete="filtro" />
+            <button class='mb-1' type="submit">Buscar</button>
+            <x-secondary-button><a href="{{ route('dashboard') }}">Limpiar filtro</a></x-secondary-button>
+        </form>
+    </div>
+
     <x-table>
         <x-slot name="tcabecera">
             <x-table.th>Codigo</x-table.th>

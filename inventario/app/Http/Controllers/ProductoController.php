@@ -6,6 +6,7 @@ use App\Models\Producto;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -14,7 +15,7 @@ class ProductoController extends Controller
      */
     public function index(): View
     {
-        $productos = Producto::with(['categoria', 'localizacion'])->paginate(9);
+        $productos = Producto::with(['categoria', 'localizacion'])->paginate(8);
 
         return view('dashboard', compact('productos'));
     }
@@ -77,5 +78,19 @@ class ProductoController extends Controller
     {
         Producto::destroy($id);
         return redirect('admin/dashboard?page='.$page);
+    }
+
+    public function filtrar(Request $request)
+    {
+        $filtro = $request->filtro;
+        $productos = Producto::with(['categoria', 'localizacion'])
+        ->where('modelo', 'like', '%' . $filtro . '%')
+        ->orWhere('codigo', 'like', '%' . $filtro . '%')
+        ->orWhereHas('categoria', function ($query) use ($filtro) {
+            $query->where('nombre', 'like', '%' . $filtro . '%');
+        })
+        ->paginate(8);
+
+        return view('dashboard', ['productos' => $productos]);
     }
 }
