@@ -30,6 +30,9 @@ class LocalizacionController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $pintarDashboard = $request->pintarDashboard;
+
         $localizacion = new Localizacion();
         $localizacion->ciudad = $request->ciudad;
         $localizacion->nombre_edificio = $request->nombre_edificio;
@@ -37,7 +40,10 @@ class LocalizacionController extends Controller
         $localizacion->numero_sala = $request->numero_sala;
         $localizacion->save();
 
-        return redirect()->route('localizaciones');
+        if($pintarDashboard) {
+            return redirect()->route('dashboard.updateProduct', ['id' => $request->id_producto, 'id_localizacion' => $localizacion->id])->method('post');
+        }
+        
     }
 
     /**
@@ -61,7 +67,7 @@ class LocalizacionController extends Controller
      */
     public function update(Request $request, Localizacion $localizacion)
     {
-        //
+        
     }
 
     /**

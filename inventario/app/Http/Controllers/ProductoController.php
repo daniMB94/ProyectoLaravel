@@ -66,9 +66,24 @@ class ProductoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request, $id, $id_localizacion)
     {
-        //
+
+        $producto_update =  Producto::with(['categoria', 'localizacion'])
+        ->where('id', $id)->first();
+
+        $producto_update->codigo = $request->codigo;
+        $producto_update->modelo = $request->modelo;
+        $producto_update->fabricante = $request->fabricante;
+        $producto_update->descripcion = $request->descripcion;
+        $producto_update->imagen = $request->imagen;
+        $producto_update->stock = $request->stock;
+        $producto_update->estado = $request->estado;
+        $producto_update->localizacion_id = $id_localizacion;
+        $producto_update->save();
+
+        return redirect()->route('dashboard'); 
+        
     }
 
     /**
