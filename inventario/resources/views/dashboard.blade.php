@@ -83,8 +83,6 @@
                             @endif
                         </x-detalle>
 
-
-
                         <x-secondary-button class="ms-4" x-data
                             x-on:click="$dispatch('close-modal', '{{ 'modal-' . $producto->id }}')">
                             {{__('Cerrar')}}
@@ -190,6 +188,16 @@
                         <option value="desaparecido">Desaparecido</option>
                         <option value="activo">Activo</option>
                         <option value="roto">Roto</option>
+                    </select>
+                </div>
+
+                <!-- Categoria -->
+                <div>
+                    <x-input-label for="categoria_id" :value="__('Categoria')" />
+                    <select id="categoria_id" name="categoria_id">
+                        @foreach($categorias as $categoria) <option value="{{ $categoria->id }}">
+                            {{ $categoria->nombre }}</option>
+                        @endforeach
                     </select>
                 </div>
 

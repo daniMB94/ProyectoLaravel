@@ -31,8 +31,6 @@ class LocalizacionController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $pintarDashboard = $request->pintarDashboard;
 
         $localizacion = new Localizacion();
         $localizacion->ciudad = $request->ciudad;
@@ -42,15 +40,15 @@ class LocalizacionController extends Controller
         $localizacion->save();
         
         $ultimaLocalizacion = Localizacion::latest()->first();
-        
+
         // Se verifica si se obtuvo una localización
         if ($ultimaLocalizacion) {
-
-            $producto = Producto::find($request->producto);
            
-            $request->producto->update(['localizacion_id' => $ultimaLocalizacion->id]);
+            $producto = Producto::find(intval($request->id_producto));
+            
+            $producto->update(['localizacion_id' => $ultimaLocalizacion->id]);
 
-            return redirect()->route('dashboard.formUpdateProduct', ['producto' => $request->producto]);
+            return redirect()->route('dashboard.formUpdateProduct', ['producto' => $producto]);
         } else {
             //si no hubiera ninguna localización se redireccionará al inicio
             return redirect()->route('dashboard');

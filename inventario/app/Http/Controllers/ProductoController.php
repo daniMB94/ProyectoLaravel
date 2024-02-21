@@ -15,9 +15,10 @@ class ProductoController extends Controller
      */
     public function index(): View
     {
-        $productos = Producto::with(['categoria', 'localizacion'])->paginate(8);
+        $productos = Producto::with(['localizacion'])->paginate(8);
+        $categorias = Categoria::all();
 
-        return view('dashboard', compact('productos'));
+        return view('dashboard', compact('productos', 'categorias'));
     }
 
     /**
@@ -41,6 +42,7 @@ class ProductoController extends Controller
         $producto->imagen = $request->imagen;
         $producto->stock = $request->stock;
         $producto->estado = $request->estado;
+        $producto->categoria_id = $request->categoria_id;
         $producto->save();
 
         return redirect()->route('dashboard');
@@ -67,11 +69,11 @@ class ProductoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id, $id_localizacion)
+    public function update(Request $request)
     {
 
         $producto_update =  Producto::with(['categoria', 'localizacion'])
-        ->where('id', $id)->first();
+        ->where('id', intval($request->id_producto))->first();
 
         $producto_update->codigo = $request->codigo;
         $producto_update->modelo = $request->modelo;
@@ -80,7 +82,7 @@ class ProductoController extends Controller
         $producto_update->imagen = $request->imagen;
         $producto_update->stock = $request->stock;
         $producto_update->estado = $request->estado;
-        $producto_update->localizacion_id = $id_localizacion;
+        $producto_update->categoria_id = intval($request->id_categoria);
         $producto_update->save();
 
         return redirect()->route('dashboard'); 
@@ -99,6 +101,7 @@ class ProductoController extends Controller
     public function filtrar(Request $request)
     {
         $filtro = $request->filtro;
+        $categorias = Categoria::all();
         $productos = Producto::with(['categoria', 'localizacion'])
         ->where('modelo', 'like', '%' . $filtro . '%')
         ->orWhere('codigo', 'like', '%' . $filtro . '%')
@@ -107,6 +110,6 @@ class ProductoController extends Controller
         })
         ->paginate(8);
 
-        return view('dashboard', ['productos' => $productos]);
+        return view('dashboard', ['productos' => $productos, 'categorias' => $categorias]);
     }
 }
