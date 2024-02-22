@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\models\Localizacion;
+use App\Models\Localizacion;
 
 class LocalizacionSeeder extends Seeder
 {
